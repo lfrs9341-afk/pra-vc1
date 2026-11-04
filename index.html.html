@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pra você ♥</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff0f3;--card:#ffffffcc;--ink:#4a1d2c;--soft:#8a5a6a;--pink:#e63a6b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d0b13;--card:#2f1420cc;--ink:#ffe6ee;--soft:#e0a9bb;--pink:#ff6b94}}
+:root[data-theme="dark"]{--bg:#1d0b13;--card:#2f1420cc;--ink:#ffe6ee;--soft:#e0a9bb;--pink:#ff6b94}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Poppins',system-ui,sans-serif;font-weight:300;text-align:center;overflow-x:hidden;min-height:100vh}
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.hearts span{position:absolute;bottom:-40px;color:var(--pink);opacity:.5;animation:up linear infinite}
+@keyframes up{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+section{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:56px 24px}
+h1,h2{font-family:'Dancing Script',cursive,serif;color:var(--pink);font-weight:600;margin:0 0 12px}
+h1{font-size:3.2rem;line-height:1.1}
+h2{font-size:2.2rem}
+p{line-height:1.7;color:var(--soft);margin:0 0 14px}
+.big{font-size:3rem;animation:beat 1.4s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.card{background:var(--card);border-radius:20px;padding:22px;box-shadow:0 8px 30px #e63a6b22;backdrop-filter:blur(6px)}
+.counter{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.counter div{background:var(--card);border-radius:14px;padding:12px 4px}
+.counter b{display:block;font-size:1.5rem;color:var(--pink);font-weight:400}
+.counter small{font-size:.7rem;color:var(--soft)}
+input{font:inherit;padding:10px 14px;border-radius:12px;border:1px solid var(--pink);background:var(--card);color:var(--ink);width:100%;margin-top:8px}
+button{font:inherit;background:var(--pink);color:#fff;border:0;border-radius:999px;padding:12px 28px;cursor:pointer;margin-top:14px;font-size:1rem}
+.reasons li{list-style:none;padding:12px 0;border-bottom:1px dashed #e63a6b55;color:var(--ink)}
+.reasons{padding:0;margin:0;text-align:left}
+#msg{display:none;margin-top:18px}
+.foot{font-size:.85rem;padding-bottom:80px}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+
+<section>
+  <div class="big">❤️</div>
+  <h1>Pra você, meu amor</h1>
+  <p>Fiz esse cantinho só pra lembrar o quanto você é especial pra mim.</p>
+  <p style="font-size:.85rem">role pra baixo ↓</p>
+</section>
+
+<section>
+  <h2>Nosso tempo juntos</h2>
+  <div class="card">
+    <p>Desde que a gente começou, já são:</p>
+    <div class="counter" id="counter"></div>
+  </div>
+</section>
+
+<section>
+  <h2>Uma pergunta</h2>
+  <div class="card">
+    <p>Você sabe o quanto eu te amo?</p>
+    <button id="yes">Sei 💕</button>
+    <button id="more" style="background:transparent;color:var(--pink);border:1px solid var(--pink)">Quero ouvir de novo</button>
+    <p id="msg"></p>
+  </div>
+</section>
+
+<section class="foot">
+  <h2>Te amo ♥</h2>
+  <p>Feito com carinho, só pra você.</p>
+  <h2 style="margin-top:28px">Eu te amo infinitamente ♾️❤️</h2>
+</section>
+
+<script>
+// Início do namoro: 21/07/2025
+var START = new Date(2025, 6, 21);
+
+function tick(){
+  var d = Math.max(0, Date.now() - START.getTime());
+  var days = Math.floor(d/864e5), h = Math.floor(d/36e5)%24, m = Math.floor(d/6e4)%60, s = Math.floor(d/1e3)%60;
+  document.getElementById('counter').innerHTML =
+    [[days,'dias'],[h,'horas'],[m,'min'],[s,'seg']].map(function(x){return '<div><b>'+x[0]+'</b><small>'+x[1]+'</small></div>'}).join('');
+}
+tick(); setInterval(tick,1000);
+
+var msgs = ['Eu te amo mais do que consigo escrever ❤️','Mais que ontem, menos que amanhã 💞','Você é o meu lugar favorito 🏡💗'];
+var i = 0, msg = document.getElementById('msg');
+function show(){ msg.style.display='block'; msg.textContent = msgs[i++ % msgs.length]; }
+document.getElementById('yes').onclick = show;
+document.getElementById('more').onclick = show;
+
+var box = document.getElementById('hearts');
+for (var k=0;k<18;k++){
+  var s = document.createElement('span');
+  s.textContent = ['❤','♥','💗'][k%3];
+  s.style.left = (Math.random()*100)+'%';
+  s.style.fontSize = (14+Math.random()*22)+'px';
+  s.style.animationDuration = (9+Math.random()*10)+'s';
+  s.style.animationDelay = (-Math.random()*15)+'s';
+  box.appendChild(s);
+}
+</script>
+</body>
+</html>
